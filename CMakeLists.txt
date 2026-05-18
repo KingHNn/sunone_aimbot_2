@@ -6,9 +6,6 @@ if(NOT WIN32)
     message(FATAL_ERROR "sunone_aimbot_2 currently supports Windows builds only.")
 endif()
 
-if(NOT CMAKE_GENERATOR STREQUAL "Visual Studio 18 2026")
-    message(FATAL_ERROR "Only 'Visual Studio 18 2026' generator is supported. Current generator: ${CMAKE_GENERATOR}")
-endif()
 
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
