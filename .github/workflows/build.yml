@@ -11,16 +11,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: 安装 VS2026 编译环境
+      - name: 安装编译工具与依赖
+        run: |
+          choco install nuget
+          nuget install Microsoft.ML.OnnxRuntime.DirectML -OutputDirectory packages
+
+      - name: Setup MSVC
         uses: ilammy/msvc-dev-cmd@v1
-        with:
-          arch: x64
-          version: "14.42"
 
       - name: CMake 配置
-        run: cmake -B build -G "Visual Studio 17 2022" -DCMAKE_BUILD_TYPE=Release
+        run: cmake -B build -G "Visual Studio 17 2022"
 
-      - name: 编译项目
+      - name: 编译 Release 版本
         run: cmake --build build --config Release
 
       - name: 上传成品EXE
